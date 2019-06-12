@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Notifications from './Notifications'
 import List from '../projects/List'
+import {connect} from 'react-redux'
 
 class Dashboard extends Component 
 {
@@ -9,7 +10,7 @@ class Dashboard extends Component
             <div className='container'>
                 <div className='row'>
                     <div className='col s12 m6'>
-                        <List />
+                        <List projects={this.props.projects} />
                     </div>
                     <div className='col s12 m5 offset-m1'>
                         <Notifications></Notifications>
@@ -20,4 +21,9 @@ class Dashboard extends Component
     }
 }
 
-export default Dashboard
+const mapStateToProps = (state) => {
+return {
+    projects: state.project.projects,
+    }
+}
+export default connect(mapStateToProps)(Dashboard)
